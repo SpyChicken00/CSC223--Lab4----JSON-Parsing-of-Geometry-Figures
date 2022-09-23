@@ -1,2 +1,1 @@
-# CSC223-Lab3--Linear-Equivalence-Class-Structure
-# A Linear Equivalence Class to store Equivalence Classes implemented with a linked list
+# CSC223-Lab4--JSON Parsing of Geometry Figures
