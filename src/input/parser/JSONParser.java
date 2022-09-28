@@ -55,5 +55,26 @@ public class JSONParser
 	
 
     // TODO: implement supporting functionality
+	
+	 // TODO: implement supporting functionality
+	
+	
+		//method for figurenode
+		//method for pointnodedatabase
+		//method for segmentnodedatabase
+		//method for description
+		
+		
+		
+		
+		
+		public static void main(String[] args)
+		{
+			String filename = "JSON/collinear_line_segments.json";
+			String figureStr = utilities.io.FileUtilities.readFileFilterComments(filename);
+			
+			System.out.println(figureStr);
+		}
+	
 
 }
