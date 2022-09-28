@@ -60,9 +60,9 @@ public class JSONParser
 		for(Object item: arry)
 		{
 			JSONObject currentNode = (JSONObject) item;
-			String name = currentNode.get("name").toString(); 
-			Integer x = (Integer) currentNode.get("x"); 
-			Integer y = (Integer) currentNode.get("y");
+			String name = currentNode.getString("name"); 
+			Integer x = currentNode.getInt("x"); 
+			Integer y = currentNode.getInt("y");
 		}
 		
 	}
