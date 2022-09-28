@@ -28,27 +28,46 @@ public class JSONParser
 		throw new ParseException("Parse error: " + message);
 	}
 
-	public ComponentNode parse(String str) throws ParseException
+	
+	//DONT LEAVE ANYTHING STATIC
+	
+	public static ComponentNode parse(String str) throws ParseException
 	{
 		// Parsing is accomplished via the JSONTokenizer class.
 		JSONTokener tokenizer = new JSONTokener(str);
 		JSONObject  JSONroot = (JSONObject)tokenizer.nextValue();
+		JSONObject figure = JSONroot.getJSONObject("Figure");
+				
+		String description = parseDescription(figure); 
+		
+		return 
+		
+		
 
         // TODO: Build the whole AST, check for return class object, and return the root
-		return null;
 	}	
 	
-	private String parseDescription(String str) {
-		//TODO parse the description from the JSON string and return description string
-		return "TODO";
+	private static String parseDescription(JSONObject json) {
+
+		return json.get("Description").toString(); 
 	}
 	
-	private PointNodeDatabase parsePointNodeDatabase(String str) {
-		//TODO parse the JSON string and create pointNodeDatabase
-		return null;
+	private PointNodeDatabase parsePointNodeDatabase(JSONObject json) {
+		
+		PointNodeDatabase PointNodeDB = new PointNodeDatabase(); 
+		JSONArray arry = json.getJSONArray("Points");
+		
+		for(Object item: arry)
+		{
+			JSONObject currentNode = (JSONObject) item;
+			String name = currentNode.get("name").toString(); 
+			Integer x = (Integer) currentNode.get("x"); 
+			Integer y = (Integer) currentNode.get("y");
+		}
+		
 	}
 	
-	private SegmentNodeDatabase parseSegmentNodeDatabase(String str) {
+	private SegmentNodeDatabase parseSegmentNodeDatabase(JSONObject json) {
 		//TODO parse the JSON string and create segmentNodeDatabase 
 		return null;
 	}
@@ -67,13 +86,14 @@ public class JSONParser
 		
 		
 		
-		
 		public static void main(String[] args)
 		{
 			String filename = "JSON/collinear_line_segments.json";
 			String figureStr = utilities.io.FileUtilities.readFileFilterComments(filename);
 			
 			System.out.println(figureStr);
+			System.out.println(parse(figureStr)); 
+			
 		}
 	
 
