@@ -35,7 +35,24 @@ public class JSONParser
 		JSONObject  JSONroot = (JSONObject)tokenizer.nextValue();
 
         // TODO: Build the whole AST, check for return class object, and return the root
+		return null;
+	}	
+	
+	private String parseDescription(String str) {
+		//TODO parse the description from the JSON string and return description string
+		return "TODO";
 	}
+	
+	private PointNodeDatabase parsePointNodeDatabase(String str) {
+		//TODO parse the JSON string and create pointNodeDatabase
+		return null;
+	}
+	
+	private SegmentNodeDatabase parseSegmentNodeDatabase(String str) {
+		//TODO parse the JSON string and create segmentNodeDatabase 
+		return null;
+	}
+	
 
     // TODO: implement supporting functionality
 
