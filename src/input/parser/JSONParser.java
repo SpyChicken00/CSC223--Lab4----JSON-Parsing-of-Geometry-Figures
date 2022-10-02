@@ -16,6 +16,14 @@ import input.components.point.PointNodeDatabase;
 import input.components.segment.SegmentNodeDatabase;
 import input.exception.ParseException;
 
+/* A JSON parser that takes a string representation of a JSON file and builds
+ * a new FigureNode 
+ * 
+* <p>Bugs: 
+* 
+* @author Jace Rettig, Jack, and George
+* @Date 10-2-22
+*/
 public class JSONParser
 {
 	protected ComponentNode  _astRoot;
@@ -30,47 +38,98 @@ public class JSONParser
 		throw new ParseException("Parse error: " + message);
 	}
 	
+	/**
+	 * Checks if JSON string is invalid
+	 * @param str
+	 * @return
+	 */
+	private boolean checkValidJSON(String str) {
+		//check if valid Figure String
+		if (!(str.contains("Figure"))) {
+			error("JSON Figure not Found");
+			return false;
+		}
+		//check if valid description
+		if (!(str.contains("Description"))) {
+			error("JSON Description Not Found");
+			return false;
+		}
+		//valid points
+		if (!(str.contains("Points"))) {
+			error("JSON Points Not Found");
+			return false;
+		}
+		//valid segments
+		if (!(str.contains("Segments"))) {
+			error("JSON Segments Not Found");
+			return false;
+		}
+		return true;
+		
+	}
+	
+	/**
+	 * Creates a new FigureNode by parsing a string representation
+	 * of a JSON file
+	 * @param JSON file contents as a string
+	 * @return a FigureNode tree
+	 * @throws ParseException
+	 */
 	public ComponentNode parse(String str) throws ParseException
 	{
+		//check if valid Figure String
+		if (!checkValidJSON(str)) return null;
 		// Parsing is accomplished via the JSONTokenizer class.
 		JSONTokener tokenizer = new JSONTokener(str);
 		JSONObject  JSONroot = (JSONObject)tokenizer.nextValue();
 		JSONObject figure = JSONroot.getJSONObject("Figure");
-				
-		String description = parseDescription(figure); 
-		PointNodeDatabase pointDB = parsePointNodeDatabase(figure);
-		SegmentNodeDatabase segmentDB = parseSegmentNodeDatabase(figure);
+			
+		//build the pieces of the figureNode
+		String description = buildDescription(figure); 
+		PointNodeDatabase pointDB = buildPointNodeDatabase(figure);
+		SegmentNodeDatabase segmentDB = buildSegmentNodeDatabase(figure);
 		
-		
-		return null;
-		
-		
-
-        // TODO: Build the whole AST, check for return class object, and return the root
+		_astRoot = new FigureNode(description, pointDB, segmentDB);
+		return _astRoot; // TODO: Build the whole AST, check for return class object, and return the root
 	}	
 	
-	private String parseDescription(JSONObject json) {
-
-		return json.get("Description").toString(); 
+	/**
+	 * Parses the JSON figure and gets the description
+	 * @param json figure
+	 * @return the description of the figure
+	 */
+	private String buildDescription(JSONObject json) {
+		return (json.get("Description") == null) ? 
+				null: json.get("Description").toString(); 
 	}
 	
-	private PointNodeDatabase parsePointNodeDatabase(JSONObject json) {
+	/**
+	 * Parses the JSON figure and builds the PointNodeDatabase
+	 * @param json figure
+	 * @return a corresponding PointNodeDatabase
+	 */
+	private PointNodeDatabase buildPointNodeDatabase(JSONObject json) {
+		PointNodeDatabase pointNodeDB = new PointNodeDatabase(); 
+		JSONArray pointArray = json.getJSONArray("Points");
+		JSONObject currentPoint = null;
+		String name = null;
+		PointNode pointA = null;
 		
-		PointNodeDatabase PointNodeDB = new PointNodeDatabase(); 
-		JSONArray arry = json.getJSONArray("Points");
-		
-		for(Object item: arry)
+		//loop through point objects
+		for(Object point: pointArray)
 		{
-			JSONObject currentNode = (JSONObject) item;
-			String name = currentNode.getString("name"); 
-			Integer x = currentNode.getInt("x"); 
-			Integer y = currentNode.getInt("y");
+			//cast to JSONObjects and get the name as a String
+			currentPoint = (JSONObject) point;
+			name = currentPoint.getString("name"); 
+			//create pointNodeObjects and add to pointNodeDB
+			pointA = getPointNode(name, json);
+			pointNodeDB.put(pointA);
 		}
-		//TODO create pointNodeDatabase
-		
-		return null;
+		//TODO double check works correctly
+		return pointNodeDB;
 		
 	}
+	
 	/**
 	 * Takes a JSON pointNode String as input and finds 
 	 * and returns a new pointNode with that name/coords
@@ -90,12 +149,13 @@ public class JSONParser
 		}
 		return null;
 	}
+	
 	/**
 	 * Parse the Figure's segment input and create a new segmentNode Database
 	 * @param JSON figure
 	 * @return a corresponding SegmentNodeDatabase
 	 */
-	private SegmentNodeDatabase parseSegmentNodeDatabase(JSONObject json) {
+	private SegmentNodeDatabase buildSegmentNodeDatabase(JSONObject json) {
 		//parse the JSON string and create segmentNodeDatabase
 		List<PointNode> points = new ArrayList<PointNode>();
 		SegmentNodeDatabase segmentDB = new SegmentNodeDatabase();
@@ -118,39 +178,14 @@ public class JSONParser
 				currentPoint = (String) segmentPoint;
 				pointB = getPointNode(currentPoint, json);
 				points.add(pointB);
-				System.out.println(points); //TODO testing output
+				//System.out.println(points); //TODO ignore testing output
 			}
 			//add new adjList with pointA and pointsB
 			segmentDB.addAdjacencyList(pointA, points);
 			points.clear();
 		}
-		System.out.println(segmentDB.asUniqueSegmentList()); //TODO testing output
+		//System.out.println(segmentDB.asUniqueSegmentList()); //TODO ignore testing output
 		return segmentDB;
 	}
-	
-
-    // TODO: implement supporting functionality
-	
-	 // TODO: implement supporting functionality
-	
-	
-		//method for figurenode
-		//method for pointnodedatabase
-		//method for segmentnodedatabase
-		//method for description
-		
-		
-		
-		/*
-		public static void main(String[] args)
-		{
-			String filename = "JSON/collinear_line_segments.json";
-			String figureStr = utilities.io.FileUtilities.readFileFilterComments(filename);
-			
-			System.out.println(figureStr);
-			System.out.println(parse(figureStr)); 
-		}
-		*/
-	
 
 }

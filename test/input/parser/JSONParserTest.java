@@ -21,13 +21,31 @@ class JSONParserTest
 		return parser.parse(figureStr);
 	}
 	
-	/*
+	
 	@Test
-	void empty_json_string_test()
+	void invalid_json_string_test()
 	{
 		JSONParser parser = new JSONParser();
-
+		//check empty string
 		assertThrows(ParseException.class, () -> { parser.parse("{}"); });
+
+		//check noDescription string
+		String noDescription = utilities.io.FileUtilities.readFileFilterComments("JSON/NO_DESCRIPTION.json");
+		ParseException exception = assertThrows(ParseException.class, () -> 
+			{ parser.parse(noDescription);});
+		assertEquals("Parse error: JSON Description Not Found", exception.getMessage());
+		
+		//check noPoints string
+		String noPoints = utilities.io.FileUtilities.readFileFilterComments("JSON/NO_POINTS.json");
+		exception = assertThrows(ParseException.class, () -> 
+		{ parser.parse(noPoints);});
+		assertEquals("Parse error: JSON Points Not Found", exception.getMessage());
+		
+		//check noSegments string
+		String noSegments = utilities.io.FileUtilities.readFileFilterComments("JSON/NO_SEGMENTS.json");
+		exception = assertThrows(ParseException.class, () -> 
+		{ parser.parse(noSegments);});
+		assertEquals("Parse error: JSON Segments Not Found", exception.getMessage());
 	}
 
 	@Test
@@ -41,10 +59,13 @@ class JSONParserTest
 		node.unparse(sb, 0);
 		System.out.println(sb.toString());
 	}
-	*/
+	
+	
+	
 	
 	@Test
-	void parsePointNodeDatabase() {
+	//TODO temp to get output from private functions
+	void buildPointNodeDatabase() {
 		ComponentNode node = JSONParserTest.runFigureParseTest("JSON/collinear_line_segments.json");
 		node = JSONParserTest.runFigureParseTest("JSON/single_triangle.json");
 	}

@@ -132,6 +132,18 @@ public class PointNodeDatabase {
 		//return newP.
 		return newP;
 	}
+	
+	/**
+	 * Returns a string representation of the pointNodeDatabase
+	 */
+	@Override
+	public String toString() {
+		String pointString = "EMPTY";
+		for (PointNode point:_points) {
+			pointString = point.toString() + "\n";
+		}
+		return pointString;
+	}
 
 
 }
