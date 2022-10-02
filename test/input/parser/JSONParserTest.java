@@ -21,6 +21,7 @@ class JSONParserTest
 		return parser.parse(figureStr);
 	}
 	
+	/*
 	@Test
 	void empty_json_string_test()
 	{
@@ -32,7 +33,7 @@ class JSONParserTest
 	@Test
 	void single_triangle_test()
 	{
-		ComponentNode node = JSONParserTest.runFigureParseTest("single_triangle.json");
+		ComponentNode node = JSONParserTest.runFigureParseTest("JSON/single_triangle.json");
 
 		assertTrue(node instanceof FigureNode);
 		
@@ -40,4 +41,12 @@ class JSONParserTest
 		node.unparse(sb, 0);
 		System.out.println(sb.toString());
 	}
+	*/
+	
+	@Test
+	void parsePointNodeDatabase() {
+		ComponentNode node = JSONParserTest.runFigureParseTest("JSON/collinear_line_segments.json");
+		node = JSONParserTest.runFigureParseTest("JSON/single_triangle.json");
+	}
+	
 }

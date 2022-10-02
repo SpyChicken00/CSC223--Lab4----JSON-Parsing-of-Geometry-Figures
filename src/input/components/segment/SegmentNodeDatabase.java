@@ -98,6 +98,7 @@ public class SegmentNodeDatabase {
 	 * @return set of PointNodes
 	 */
 	private Set<PointNode> listToSet(List<PointNode> list) {
+		if (list == null) return null;
 		Set<PointNode> nodeSet = new HashSet<PointNode>();
 		for (PointNode node: list) {
 			nodeSet.add(node);
