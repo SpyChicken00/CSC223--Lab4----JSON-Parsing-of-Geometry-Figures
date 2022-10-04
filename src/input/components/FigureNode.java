@@ -38,6 +38,6 @@ public class FigureNode implements ComponentNode
 		sb.append("Description: " + _description +"\n");
 		_points.unparse(sb, 2);
 		_segments.unparse(sb, 2);
-		sb.append("}");
+		sb.append("}\n\n---------------------------------------------------------");
     }
 }
