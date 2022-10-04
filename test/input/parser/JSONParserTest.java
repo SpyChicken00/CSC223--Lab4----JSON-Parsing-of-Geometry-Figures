@@ -60,7 +60,17 @@ class JSONParserTest
 		System.out.println(sb.toString());
 	}
 	
-	
+	@Test
+	void crossingSymmetricTriangleTest()
+	{
+		ComponentNode node = JSONParserTest.runFigureParseTest("JSON/crossing_symmetric_triangle.json");
+
+		assertTrue(node instanceof FigureNode);
+		
+		StringBuilder sb = new StringBuilder();
+		node.unparse(sb, 0);
+		System.out.println(sb.toString());
+	}
 	
 	
 	@Test

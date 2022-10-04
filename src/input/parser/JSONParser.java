@@ -99,8 +99,7 @@ public class JSONParser
 	 * @return the description of the figure
 	 */
 	private String buildDescription(JSONObject json) {
-		return (json.get("Description") == null) ? 
-				null: json.get("Description").toString(); 
+		return json.getString("Description");
 	}
 	
 	/**
@@ -169,7 +168,8 @@ public class JSONParser
 		for (Object adjList: segments) {
 			//get the adjList String key and create a new pointNodeA
 			currentAdjList = (JSONObject) adjList;
-			key = currentAdjList.keySet().iterator().next();
+			key = currentAdjList.keys().next();
+			//System.out.println(key); //TODO ignore testing
 			pointA = getPointNode(key, json);
 			//create array of pointNode Strings
 			pointsArray = currentAdjList.getJSONArray(key);

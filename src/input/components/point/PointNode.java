@@ -8,12 +8,14 @@
  */
 package input.components.point;
 
+import input.components.ComponentNode;
+import utilities.io.StringUtilities;
 import utilities.math.MathUtilities;
 
 /**
  * A 2D Point (x, y).
  */
-public class PointNode
+public class PointNode implements ComponentNode
 {
 	protected static final String ANONYMOUS = "__UNNAMED";
 
@@ -79,4 +81,13 @@ public class PointNode
     {
     	return _name + "(" + _x + ", " + _y + ")";
 	}
+
+	@Override
+	public void unparse(StringBuilder sb, int level) {
+		sb.append(StringUtilities.indent(level));
+		sb.append("Point(" + _name + ")(" + _x + ", " + _y + ")");
+		
+	}
+    
+    
 }

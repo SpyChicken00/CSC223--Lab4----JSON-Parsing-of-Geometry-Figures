@@ -6,7 +6,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.*;
+
+import input.components.ComponentNode;
 import input.components.point.*;
+import utilities.io.StringUtilities;
 
 /**
  * A database to store segment nodes
@@ -16,7 +19,7 @@ import input.components.point.*;
  * @author Jace Rettig and James Crawford
  * @Date 9-1-22
  */
-public class SegmentNodeDatabase {
+public class SegmentNodeDatabase implements ComponentNode {
 	private Map<PointNode, Set<PointNode>> _adjLists;
 	
 	public SegmentNodeDatabase() {
@@ -169,6 +172,27 @@ public class SegmentNodeDatabase {
 		}
 		return segmentList;
 	}
+	
+	
+	
+	public void unparse(StringBuilder sb, int level) {
+		sb.append(StringUtilities.indent(1));
+		sb.append("Segments: \n");
+		sb.append(StringUtilities.indent(1));
+		sb.append("{\n");
+		//loop
+		for (Map.Entry<PointNode, Set<PointNode>> key: _adjLists.entrySet()) {
+			sb.append(StringUtilities.indent(level));
+			sb.append(key.getKey().getName() + " : ");
+			for (PointNode value: key.getValue()) {
+				sb.append(value.getName() + "  ");
+			}
+			sb.append("\n");
+		}
+		sb.append(StringUtilities.indent(1));
+		sb.append("}\n");
+	}
+	
 	
 	
 	
