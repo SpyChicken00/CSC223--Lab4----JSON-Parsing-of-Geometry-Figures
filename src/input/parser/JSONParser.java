@@ -166,25 +166,24 @@ public class JSONParser
 
 		//Loop through each AdjList and create points
 		for (Object adjList: segments) {
-			//get the adjList String key and create a new pointNodeA
+			//get the adjList point name and create a new pointNodeA
 			currentAdjList = (JSONObject) adjList;
 			key = currentAdjList.keys().next();
-			//System.out.println(key); //TODO ignore testing
 			pointA = getPointNode(key, json);
-			//create array of pointNode Strings
+			
+			//create array of point names from adjList
 			pointsArray = currentAdjList.getJSONArray(key);
 			for (Object segmentPoint: pointsArray) {
 				//create new pointNodeBs and add them to points list
 				currentPoint = (String) segmentPoint;
 				pointB = getPointNode(currentPoint, json);
 				points.add(pointB);
-				//System.out.println(points); //TODO ignore testing output
+				
 			}
 			//add new adjList with pointA and pointsB
 			segmentDB.addAdjacencyList(pointA, points);
 			points.clear();
 		}
-		//System.out.println(segmentDB.asUniqueSegmentList()); //TODO ignore testing output
 		return segmentDB;
 	}
 

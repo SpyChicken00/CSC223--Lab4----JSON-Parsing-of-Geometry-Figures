@@ -10,6 +10,12 @@ import input.components.ComponentNode;
 import input.components.FigureNode;
 import input.exception.ParseException;
 
+/**
+ * Test cases for parsing and unparsing JSON
+ * @author Jace, Jack, and George
+ * @Date 10-2-22
+ *
+ */
 class JSONParserTest
 {
 	public static ComponentNode runFigureParseTest(String filename)

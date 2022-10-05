@@ -34,10 +34,11 @@ public class FigureNode implements ComponentNode
 	public void unparse(StringBuilder sb, int level)
 	{
 		sb.append("Figure\n{\n");
-		sb.append(StringUtilities.indent(1));
+		sb.append(StringUtilities.indent(level + 1));
 		sb.append("Description: " + _description +"\n");
-		_points.unparse(sb, 2);
-		_segments.unparse(sb, 2);
+		_points.unparse(sb, level + 2);
+		_segments.unparse(sb, level + 2);
 		sb.append("}\n\n---------------------------------------------------------");
     }
+	
 }
