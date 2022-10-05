@@ -162,7 +162,6 @@ public class JSONParser
 	private SegmentNodeDatabase buildSegmentNodeDatabase(JSONArray segments, JSONArray points) {
 		//parse the JSON string and create segmentNodeDatabase
 		SegmentNodeDatabase segmentDB = new SegmentNodeDatabase();
-		JSONArray pointsArray = null;
 		JSONObject currentAdjList = null;
 		String currentPoint, key = null;
 		PointNode pointA, pointB = null;
@@ -173,18 +172,13 @@ public class JSONParser
 			currentAdjList = (JSONObject) adjList;
 			key = currentAdjList.keys().next();
 			pointA = getPointNode(key, points);
-			/*
+
 			//create array of point names from adjList
+<<<<<<< Updated upstream
 			pointsArray = currentAdjList.getJSONArray(key);
-			for (Object segmentPoint: pointsArray) {
-				//create new pointNodeBs and add them to points list
-				currentPoint = (String) segmentPoint;
-				pointB = getPointNode(currentPoint, points);
-				pointList.add(pointB);
-			}
-			*/
-			//create array of point names from adjList
-			pointsArray = currentAdjList.getJSONArray(key);
+=======
+			JSONArray pointsArray = currentAdjList.getJSONArray(key);
+>>>>>>> Stashed changes
 			List<PointNode> pointList = buildPointList(pointsArray, points);
 			
 			//add new adjList with pointA and pointsB
