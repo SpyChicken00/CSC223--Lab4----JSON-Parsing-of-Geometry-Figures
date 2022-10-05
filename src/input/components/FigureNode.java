@@ -35,9 +35,12 @@ public class FigureNode implements ComponentNode
 	{
 		sb.append("Figure\n{\n");
 		sb.append(StringUtilities.indent(level + 1));
+		
+		//unparsing the children
 		sb.append("Description: " + _description +"\n");
 		_points.unparse(sb, level + 2);
 		_segments.unparse(sb, level + 2);
+		
 		sb.append("}\n\n---------------------------------------------------------");
     }
 	

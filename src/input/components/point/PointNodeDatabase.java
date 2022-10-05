@@ -158,6 +158,7 @@ public class PointNodeDatabase implements ComponentNode {
 			p.unparse(sb, level);
 			sb.append("\n");
 		}
+		
 		sb.append(StringUtilities.indent(level - 1));
 		sb.append("}\n");
 	}
