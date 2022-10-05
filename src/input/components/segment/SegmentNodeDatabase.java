@@ -175,7 +175,7 @@ public class SegmentNodeDatabase implements ComponentNode {
 	
 	
 	/**
-	 * Unparse the SegmentNodeDatabase 
+	 * Unparse the SegmentNodeDatabase: glorified toString ;n; 
 	 */
 	public void unparse(StringBuilder sb, int level) {
 		sb.append(StringUtilities.indent(level - 1));
