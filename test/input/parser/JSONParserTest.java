@@ -74,6 +74,60 @@ class JSONParserTest
 	
 	
 	@Test
+	void FullyConnectedIrregularPolygonTest()
+	{
+		ComponentNode node = JSONParserTest.runFigureParseTest("JSON/fully_connected_irregular_polygon.json");
+
+		assertTrue(node instanceof FigureNode);
+		
+		StringBuilder sb = new StringBuilder();
+		node.unparse(sb, 0);
+		System.out.println(sb.toString());
+	}
+	
+	@Test
+	void SquareTest()
+	{
+		ComponentNode node = JSONParserTest.runFigureParseTest("JSON/square.json");
+
+		assertTrue(node instanceof FigureNode);
+		
+		StringBuilder sb = new StringBuilder();
+		node.unparse(sb, 0);
+		System.out.println(sb.toString());
+	}
+	
+	
+	
+	@Test
+	void ThirdQuadrantSquareTest()
+	{
+		ComponentNode node = JSONParserTest.runFigureParseTest("JSON/third_quadrant_square.json");
+
+		assertTrue(node instanceof FigureNode);
+		
+		StringBuilder sb = new StringBuilder();
+		node.unparse(sb, 0);
+		System.out.println(sb.toString());
+	}
+	
+	
+	@Test
+	void PentagonTest()
+	{
+		ComponentNode node = JSONParserTest.runFigureParseTest("JSON/pentagon.json");
+
+		assertTrue(node instanceof FigureNode);
+		
+		StringBuilder sb = new StringBuilder();
+		node.unparse(sb, 0);
+		System.out.println(sb.toString());
+	}
+	
+	
+	
+	
+	@Test
 	//TODO temp to get output from private functions
 	void buildPointNodeDatabase() {
 		ComponentNode node = JSONParserTest.runFigureParseTest("JSON/collinear_line_segments.json");
