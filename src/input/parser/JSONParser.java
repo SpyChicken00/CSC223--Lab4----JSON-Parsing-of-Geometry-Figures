@@ -185,7 +185,7 @@ public class JSONParser
 			*/
 			//create array of point names from adjList
 			pointsArray = currentAdjList.getJSONArray(key);
-			List<PointNode> pointList = buildPointList(pointsArray);
+			List<PointNode> pointList = buildPointList(pointsArray, points);
 			
 			//add new adjList with pointA and pointsB
 			segmentDB.addAdjacencyList(pointA, pointList);
@@ -194,11 +194,11 @@ public class JSONParser
 		return segmentDB;
 	}
 	
-	private List<PointNode> buildPointList(JSONArray points) 
+	private List<PointNode> buildPointList(JSONArray pointsArray, JSONArray points) 
 	{
 		List<PointNode> pointList = new ArrayList<PointNode>();
 		//create array of point names from adjList
-		for (Object segmentPoint: points) {
+		for (Object segmentPoint: pointsArray) {
 			//create new pointNodeBs and add them to points list
 			String currentPoint = (String) segmentPoint;
 			PointNode pointB = getPointNode(currentPoint, points);
