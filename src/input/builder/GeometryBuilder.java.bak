@@ -1,0 +1,100 @@
+package input.builder;
+
+import java.util.List;
+
+import input.components.FigureNode;
+import input.components.point.PointNode;
+import input.components.point.PointNodeDatabase;
+import input.components.segment.SegmentNode;
+import input.components.segment.SegmentNodeDatabase;
+
+public class GeometryBuilder extends DefaultBuilder {
+
+	
+	public GeometryBuilder() 
+	{
+<<<<<<< HEAD
+		
+=======
+		//TODO check if need to verify valid information in builder or not
+		//TODO create more shapes
+>>>>>>> Test-Branch
+	}
+
+	@Override
+    public FigureNode buildFigureNode(String description,
+    		                          PointNodeDatabase points,
+    		                          SegmentNodeDatabase segments)
+    {
+<<<<<<< HEAD
+        return null;
+=======
+        return new FigureNode(description, points, segments);
+>>>>>>> Test-Branch
+    }
+    
+	@Override
+    public SegmentNodeDatabase buildSegmentNodeDatabase()
+    {
+<<<<<<< HEAD
+        return null;
+=======
+        return new SegmentNodeDatabase();
+>>>>>>> Test-Branch
+    }
+    
+	@Override
+    public void addSegmentToDatabase(SegmentNodeDatabase segments, PointNode from, PointNode to)
+    {
+    	if (segments != null) segments.addUndirectedEdge(from, to);
+    }
+<<<<<<< HEAD
+=======
+	
+	/**
+	 * Adds an AdjList to the input segmentNodeDatabase
+	 *
+	 * Created to avoid having to rewrite JSON parser to create segments instead of AdjList
+	 * @param segments
+	 * @param point
+	 * @param pointList
+	 */
+	@Override
+	public void addAdjListToSegmentDatabase(SegmentNodeDatabase segments, PointNode point, List<PointNode> pointList) 
+	{
+		segments.addAdjacencyList(point, pointList);
+	}
+>>>>>>> Test-Branch
+    
+	@Override
+    public SegmentNode buildSegmentNode(PointNode pt1, PointNode pt2)
+    {
+<<<<<<< HEAD
+        return null;
+=======
+        return new SegmentNode(pt1, pt2);
+>>>>>>> Test-Branch
+    }
+    
+	@Override
+    public PointNodeDatabase buildPointDatabaseNode(List<PointNode> points)
+    {
+<<<<<<< HEAD
+        return null;
+=======
+        return new PointNodeDatabase(points);
+>>>>>>> Test-Branch
+    }
+    
+	@Override
+    public PointNode buildPointNode(String name, double x, double y)
+    {
+<<<<<<< HEAD
+        return null;
+=======
+		
+        return new PointNode(name, x, y);
+>>>>>>> Test-Branch
+    }
+	
+}

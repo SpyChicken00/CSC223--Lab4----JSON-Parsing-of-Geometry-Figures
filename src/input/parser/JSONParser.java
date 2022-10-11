@@ -161,7 +161,7 @@ public class JSONParser
 	 */
 	private SegmentNodeDatabase buildSegmentNodeDatabase(JSONArray segments, JSONArray JSONPointsArray) {
 		//parse the JSON string and create segmentNodeDatabase
-		SegmentNodeDatabase segmentDB = new SegmentNodeDatabase();	
+		SegmentNodeDatabase segmentDB = _builder.buildSegmentNodeDatabase();	
 		//Loop through each AdjList and create points
 		for (Object adjList: segments) {
 			//get the adjList point name and create a new pointNodeA
@@ -180,6 +180,12 @@ public class JSONParser
 		return segmentDB;
 	}
 	
+	/**
+	 * Creates a pointList of points for a single AdjLists
+	 * @param SegmentPointsArray
+	 * @param points
+	 * @return
+	 */
 	private List<PointNode> buildSegmentPointList(JSONArray SegmentPointsArray, JSONArray points) 
 	{
 		List<PointNode> pointList = new ArrayList<PointNode>();
