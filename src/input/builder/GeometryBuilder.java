@@ -36,6 +36,20 @@ public class GeometryBuilder extends DefaultBuilder {
     {
     	if (segments != null) segments.addUndirectedEdge(from, to);
     }
+	
+	/**
+	 * Adds an AdjList to the input segmentNodeDatabase
+	 *
+	 * Created to avoid having to rewrite JSON parser to create segments instead of AdjList
+	 * @param segments
+	 * @param point
+	 * @param pointList
+	 */
+	@Override
+	public void addAdjListToSegmentDatabase(SegmentNodeDatabase segments, PointNode point, List<PointNode> pointList) 
+	{
+		segments.addAdjacencyList(point, pointList);
+	}
     
 	@Override
     public SegmentNode buildSegmentNode(PointNode pt1, PointNode pt2)
