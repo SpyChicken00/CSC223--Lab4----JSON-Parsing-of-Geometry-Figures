@@ -29,6 +29,7 @@ public class SegmentNodeDatabase implements ComponentNode {
 	public SegmentNodeDatabase(Map<PointNode, Set<PointNode>> m) {
 		//TODO make copy of m
 		//_adjLists = m;
+		//Map<PointNode, Set<PointNode>> mapCopy = m;
 		
 		//makes a copy of m so that data will not be altered
 		//MAY NOT WORK PROPERLY

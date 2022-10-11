@@ -34,6 +34,17 @@ public class DefaultBuilder
     	if (segments != null) segments.addUndirectedEdge(from, to);
     }
     
+    /**
+     * added to avoid rewritting json parser
+     * @param segments
+     * @param point
+     * @param pointList
+     */
+    public void addAdjListToSegmentDatabase(SegmentNodeDatabase segments, PointNode point, List<PointNode> pointList) 
+	{
+		
+	}
+    
     public SegmentNode buildSegmentNode(PointNode pt1, PointNode pt2)
     {
         return null;

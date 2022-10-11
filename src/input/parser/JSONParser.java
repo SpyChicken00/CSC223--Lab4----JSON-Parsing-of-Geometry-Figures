@@ -10,6 +10,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import input.builder.DefaultBuilder;
+import input.builder.GeometryBuilder;
 import input.components.*;
 import input.components.point.PointNode;
 import input.components.point.PointNodeDatabase;
@@ -27,10 +29,13 @@ import input.exception.ParseException;
 public class JSONParser
 {
 	protected ComponentNode  _astRoot;
+	protected GeometryBuilder _builder;
 
 	public JSONParser()
 	{
 		_astRoot = null;
+		_builder = new GeometryBuilder();
+		
 	}
 
 	private void error(String message)
@@ -96,9 +101,9 @@ public class JSONParser
 		SegmentNodeDatabase segmentDB = buildSegmentNodeDatabase(segmentsArray, pointsArray);
 		
 		//create tree
-		_astRoot = new FigureNode(description, pointDB, segmentDB);
-		return _astRoot; // TODO: Build the whole AST, check for return class object, and return the root
-	}	
+		//Build the whole AST, check for return class object, and return the root	
+		return _astRoot = _builder.buildFigureNode(description, pointDB, segmentDB); 
+	}
 	
 	/**
 	 * Parses the JSON figure and gets the description
@@ -114,25 +119,20 @@ public class JSONParser
 	 * @param json figure
 	 * @return a corresponding PointNodeDatabase
 	 */
-	private PointNodeDatabase buildPointNodeDatabase(JSONArray pointArray) {
-		PointNodeDatabase pointNodeDB = new PointNodeDatabase(); 
-		JSONObject currentPoint = null;
-		String name = null;
-		PointNode pointA = null;
-		
+	private PointNodeDatabase buildPointNodeDatabase(JSONArray pointArray) 
+	{
+		List<PointNode> pointList = new ArrayList<PointNode>();
 		//loop through point objects
 		for(Object point: pointArray)
 		{
 			//cast to JSONObjects and get the name as a String
-			currentPoint = (JSONObject) point;
-			name = currentPoint.getString("name"); 
-			//create pointNodeObjects and add to pointNodeDB
-			pointA = getPointNode(name, pointArray);
-			pointNodeDB.put(pointA);
+			JSONObject currentPoint = (JSONObject) point;
+			String name = currentPoint.getString("name"); 
+			//create pointNodeObjects and add to pointList
+			PointNode pointA = getPointNode(name, pointArray);
+			pointList.add(pointA);
 		}
-		//TODO double check works correctly
-		return pointNodeDB;
-		
+		return _builder.buildPointDatabaseNode(pointList);
 	}
 	
 	/**
@@ -141,14 +141,14 @@ public class JSONParser
 	 * @param String key
 	 * @return a new PointNode
 	 */
-	private PointNode getPointNode (String key, JSONArray points) {
+	private PointNode getPointNode (String name, JSONArray points) {
 		//find input key
 		for (Object point:points) {
 			JSONObject currentPoint = (JSONObject) point;
-			if (currentPoint.get("name").equals(key)) {
+			if (currentPoint.get("name").equals(name)) {
 				double x = currentPoint.getDouble("x");
 				double y = currentPoint.getDouble("y");
-				return new PointNode(key, x, y);
+				return _builder.buildPointNode(name, x, y);
 			}
 		}
 		return null;
@@ -159,23 +159,19 @@ public class JSONParser
 	 * @param JSON figure
 	 * @return a corresponding SegmentNodeDatabase
 	 */
-	private SegmentNodeDatabase buildSegmentNodeDatabase(JSONArray segments, JSONArray points) {
+	private SegmentNodeDatabase buildSegmentNodeDatabase(JSONArray segments, JSONArray JSONPointsArray) {
 		//parse the JSON string and create segmentNodeDatabase
-		SegmentNodeDatabase segmentDB = new SegmentNodeDatabase();
-		JSONObject currentAdjList = null;
-		String currentPoint, key = null;
-		PointNode pointA, pointB = null;
-
+		SegmentNodeDatabase segmentDB = new SegmentNodeDatabase();	
 		//Loop through each AdjList and create points
 		for (Object adjList: segments) {
 			//get the adjList point name and create a new pointNodeA
-			currentAdjList = (JSONObject) adjList;
-			key = currentAdjList.keys().next();
-			pointA = getPointNode(key, points);
+			JSONObject currentAdjList = (JSONObject) adjList;
+			String key = currentAdjList.keys().next();
+			PointNode pointA = getPointNode(key, JSONPointsArray);
 
 			//create array of point names from adjList
-			JSONArray pointsArray = currentAdjList.getJSONArray(key);
-			List<PointNode> pointList = buildPointList(pointsArray, points);
+			JSONArray SegmentPointsArray = currentAdjList.getJSONArray(key);
+			List<PointNode> pointList = buildSegmentPointList(SegmentPointsArray, JSONPointsArray);
 			
 			//add new adjList with pointA and pointsB
 			segmentDB.addAdjacencyList(pointA, pointList);
@@ -184,11 +180,11 @@ public class JSONParser
 		return segmentDB;
 	}
 	
-	private List<PointNode> buildPointList(JSONArray pointsArray, JSONArray points) 
+	private List<PointNode> buildSegmentPointList(JSONArray SegmentPointsArray, JSONArray points) 
 	{
 		List<PointNode> pointList = new ArrayList<PointNode>();
 		//create array of point names from adjList
-		for (Object segmentPoint: pointsArray) {
+		for (Object segmentPoint: SegmentPointsArray) {
 			//create new pointNodeBs and add them to points list
 			String currentPoint = (String) segmentPoint;
 			PointNode pointB = getPointNode(currentPoint, points);
