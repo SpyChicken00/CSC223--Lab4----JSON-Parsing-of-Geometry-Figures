@@ -10,6 +10,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import input.builder.DefaultBuilder;
+import input.builder.GeometryBuilder;
 import input.components.*;
 import input.components.point.PointNode;
 import input.components.point.PointNodeDatabase;
@@ -27,10 +29,13 @@ import input.exception.ParseException;
 public class JSONParser
 {
 	protected ComponentNode  _astRoot;
+	protected DefaultBuilder _builder;
 
 	public JSONParser()
 	{
 		_astRoot = null;
+		_builder = new GeometryBuilder();
+		
 	}
 
 	private void error(String message)
@@ -96,7 +101,7 @@ public class JSONParser
 		SegmentNodeDatabase segmentDB = buildSegmentNodeDatabase(segmentsArray, pointsArray);
 		
 		//create tree
-		_astRoot = new FigureNode(description, pointDB, segmentDB);
+		_astRoot = _builder.buildFigureNode(description, pointDB, segmentDB);
 		return _astRoot; // TODO: Build the whole AST, check for return class object, and return the root
 	}	
 	
