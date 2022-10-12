@@ -1,7 +1,8 @@
 {
   "Figure" :
   {
-    "Description" : "A",
+  //TODO FINISH THIS HOME
+    "Description" : "A geometric portrait of dr. alvin because our what is a more interesting shape than dr. alvin himself :)",
     "Points" :
 	  [
 	    {
@@ -65,6 +66,56 @@
    	      "y" : 4
 		}
 		
+		{
+	      "name" : "M",
+		  "x" : 6,
+   	      "y" : 4
+		}
+		{
+	      "name" : "N",
+		  "x" : 6,
+   	      "y" : 4
+		}
+		{
+	      "name" : "O",
+		  "x" : 6,
+   	      "y" : 4
+		}
+		{
+	      "name" : "P",
+		  "x" : 6
+   	      "y" : 4
+		}
+		{
+	      "name" : "Q",
+		  "x" : 6,
+   	      "y" : 4
+		}
+		{
+	      "name" : "R",
+		  "x" : 6,
+   	      "y" : 4
+		}
+		{
+	      "name" : "S",
+		  "x" : 6,
+   	      "y" : 4
+		}
+		{
+	      "name" : "T",
+		  "x" : 6,
+   	      "y" : 4
+		}
+		{
+	      "name" : "U",
+		  "x" : 6,
+   	      "y" : 4
+		}
+		{
+	      "name" : "V",
+		  "x" : 6,
+   	      "y" : 4
+		}
 	  ],
   
     "Segments" :

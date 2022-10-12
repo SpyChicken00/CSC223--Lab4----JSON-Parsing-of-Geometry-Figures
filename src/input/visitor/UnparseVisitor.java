@@ -8,6 +8,7 @@ import input.components.*;
 import input.components.point.*;
 import input.components.segment.SegmentNode;
 import input.components.segment.SegmentNodeDatabase;
+import utilities.io.StringUtilities;
 
 //
 // A JSON file may contain:
@@ -27,11 +28,20 @@ public class UnparseVisitor implements ComponentNodeVisitor
 		StringBuilder sb = pair.getKey();
 		int level = pair.getValue();
 
-        // TODO
+		sb.append("Figure\n{\n");
+		sb.append(StringUtilities.indent(level + 1));
+		
+		//unparsing the children
+		sb.append("Description: " + _description +"\n");
+		_points.unparse(sb, level + 2);
+		_segments.unparse(sb, level + 2);
+		
+		sb.append("}\n\n---------------------------------------------------------");
 
         return null;
 	}
 
+	public Object visitDescriptionNode 
 	@Override
 	public Object visitSegmentDatabaseNode(SegmentNodeDatabase node, Object o)
 	{
