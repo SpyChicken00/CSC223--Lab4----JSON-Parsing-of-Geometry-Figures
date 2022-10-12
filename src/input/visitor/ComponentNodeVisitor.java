@@ -9,6 +9,7 @@ import input.components.segment.SegmentNodeDatabase;
 // A JSON file may contain:
 //
 //     Figure:
+//       Description
 //       Points
 //       Segments
 //
@@ -23,4 +24,5 @@ public interface ComponentNodeVisitor
 	Object visitPointNode(PointNode node, Object o);
 
 	Object visitPointNodeDatabase(PointNodeDatabase node, Object o);
+	
 }

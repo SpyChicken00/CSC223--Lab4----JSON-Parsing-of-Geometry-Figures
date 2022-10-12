@@ -31,6 +31,12 @@ public class FigureNode implements ComponentNode
 	}
 
 	@Override
+	public Object accept(ComponentNodeVisitor visitor, Object o)
+	{
+	return visitor.visitFigureNode(this, o);
+	}
+	}
+	@Override
 	public void unparse(StringBuilder sb, int level)
 	{
 		sb.append("Figure\n{\n");

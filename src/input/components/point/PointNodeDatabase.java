@@ -162,6 +162,14 @@ public class PointNodeDatabase implements ComponentNode {
 		sb.append(StringUtilities.indent(level - 1));
 		sb.append("}\n");
 	}
+	
+	/**
+	 * Returns the points in the pointNodeDatabase
+	 * @return
+	 */
+	public Set<PointNode> getPointsSet() {
+		return _points;
+	}
 
 
 }
