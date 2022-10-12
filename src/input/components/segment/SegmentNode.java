@@ -8,13 +8,15 @@
  */
 package input.components.segment;
 
+import input.components.ComponentNode;
 import input.components.point.PointNode;
+import input.visitor.ComponentNodeVisitor;
 
 
 /**
  * A utility class only for representing ONE segment
  */
-public class SegmentNode
+public class SegmentNode implements ComponentNode
 {
 	protected PointNode _point1;
 	protected PointNode _point2;
@@ -50,5 +52,11 @@ public class SegmentNode
 	@Override
 	public String toString() {
 		return _point1.getName() + _point2.getName();
+	}
+	
+	@Override
+	public Object accept(ComponentNodeVisitor visitor, Object o) {
+		visitor.visitSegmentNode(null, o);
+		return null;
 	}
 }

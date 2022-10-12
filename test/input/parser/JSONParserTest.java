@@ -3,12 +3,15 @@ package input.parser;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.AbstractMap;
+
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 
 import input.components.ComponentNode;
 import input.components.FigureNode;
 import input.exception.ParseException;
+import input.visitor.UnparseVisitor;
 
 /**
  * Test cases for parsing and unparsing JSON
@@ -62,10 +65,17 @@ class JSONParserTest
 		assertTrue(node instanceof FigureNode);
 		
 		StringBuilder sb = new StringBuilder();
-		node.unparse(sb, 0);
-		System.out.println(sb.toString());
+		UnparseVisitor unparser = new UnparseVisitor();
+		unparser.visitFigureNode((FigureNode)node, new AbstractMap.SimpleEntry<StringBuilder, Integer>(sb, 0));
+		
+		
+		//StringBuilder sb = new StringBuilder();
+		//node.unparse(sb, 0);
+		node.accept(unparser, sb);
+		//System.out.println(sb.toString());
 	}
 	
+	/*
 	@Test
 	void crossingSymmetricTriangleTest()
 	{
@@ -139,5 +149,6 @@ class JSONParserTest
 		ComponentNode node = JSONParserTest.runFigureParseTest("JSON/collinear_line_segments.json");
 		node = JSONParserTest.runFigureParseTest("JSON/single_triangle.json");
 	}
+	*/
 	
 }

@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Set;
 
 import input.components.ComponentNode;
+import input.visitor.ComponentNodeVisitor;
 import utilities.io.StringUtilities;
 
 public class PointNodeDatabase implements ComponentNode {
@@ -148,6 +149,7 @@ public class PointNodeDatabase implements ComponentNode {
 		return pointString;
 	}
 	
+	/*
 	public void unparse(StringBuilder sb, int level) {
 		sb.append(StringUtilities.indent(level - 1));
 		sb.append("Points: \n");
@@ -162,6 +164,7 @@ public class PointNodeDatabase implements ComponentNode {
 		sb.append(StringUtilities.indent(level - 1));
 		sb.append("}\n");
 	}
+	*/
 	
 	/**
 	 * Returns the points in the pointNodeDatabase
@@ -169,6 +172,12 @@ public class PointNodeDatabase implements ComponentNode {
 	 */
 	public Set<PointNode> getPointsSet() {
 		return _points;
+	}
+
+	@Override
+	public Object accept(ComponentNodeVisitor visitor, Object o) {
+		// TODO Auto-generated method stub
+		return visitor.visitPointNodeDatabase(this, o);
 	}
 
 

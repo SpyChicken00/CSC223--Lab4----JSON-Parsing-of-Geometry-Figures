@@ -35,13 +35,14 @@ public class UnparseVisitor implements ComponentNodeVisitor
 		sb.append("Description: " + node.getDescription() +"\n");
 		
 		//get points
-		visitPointNodeDatabase(node.getPointsDatabase(), o);
-		visitPointNode(node.getPointsDatabase(), o);
+		visitPointNodeDatabase(node.getPointsDatabase(), pair);
+		//get segments
+		visitSegmentDatabaseNode(node.getSegments(), pair);
+		
 		//_points.unparse(sb, level + 2);
 		//_segments.unparse(sb, level + 2);
 		
-		//sb.append("}\n\n---------------------------------------------------------");
-		
+		sb.append("}\n\n---------------------------------------------------------");
 
         return null;
 	}
@@ -67,29 +68,25 @@ public class UnparseVisitor implements ComponentNodeVisitor
 	@Override
 	public Object visitPointNodeDatabase(PointNodeDatabase node, Object o)
 	{
-		/*
+		// Unpack the input object containing a Stringbuilder and an indentation level
+		@SuppressWarnings("unchecked")
+		AbstractMap.SimpleEntry<StringBuilder, Integer> pair = (AbstractMap.SimpleEntry<StringBuilder, Integer>)(o);
+		StringBuilder sb = pair.getKey();
+		int level = pair.getValue();
+		
 		sb.append(StringUtilities.indent(level - 1));
 		sb.append("Points: \n");
 		sb.append(StringUtilities.indent(level - 1));
 		sb.append("{\n");
-		
-		for (PointNode p: _points) {
-			p.unparse(sb, level);
-			sb.append("\n");
+        
+		Set<PointNode> points = node.getPointsSet();
+		for (PointNode p: points) 
+		{
+			visitPointNode(p, pair);
 		}
 		
 		sb.append(StringUtilities.indent(level - 1));
 		sb.append("}\n");
-		*/
-        // TODO
-		Set<PointNode> points = node.getPointsSet();
-		for (PointNode p: points) 
-		{
-			//p.unparse(sb, level);
-			//sb.append("\n");
-			visitPointNode(p, o);
-		}
-		
 		
         return null;
 	}
@@ -97,13 +94,17 @@ public class UnparseVisitor implements ComponentNodeVisitor
 	@Override
 	public Object visitPointNode(PointNode node, Object o)
 	{
-        // TODO
+		// Unpack the input object containing a Stringbuilder and an indentation level
+		@SuppressWarnings("unchecked")
+		AbstractMap.SimpleEntry<StringBuilder, Integer> pair = (AbstractMap.SimpleEntry<StringBuilder, Integer>)(o);
+		StringBuilder sb = pair.getKey();
+		int level = pair.getValue();
 		
-		/*
+		
 		sb.append(StringUtilities.indent(level));
-		sb.append("Point(" + _name + ")(" + _x + ", " + _y + ")");
-		*/
-        
+		sb.append("Point(" + node.getName() + ")(" + node.getX() + ", " + node.getY() + ")");
+		sb.append("\n");
+		
         return null;
 	}
 }

@@ -5,6 +5,7 @@ import java.util.Set;
 import input.components.point.PointNode;
 import input.components.point.PointNodeDatabase;
 import input.components.segment.SegmentNodeDatabase;
+import input.visitor.ComponentNodeVisitor;
 import utilities.io.StringUtilities;
 
 /**
@@ -33,8 +34,10 @@ public class FigureNode implements ComponentNode
 	@Override
 	public Object accept(ComponentNodeVisitor visitor, Object o)
 	{
-	return visitor.visitFigureNode(this, o);
+		return visitor.visitFigureNode(this, o);
 	}
+	
+	/*
 	}
 	@Override
 	public void unparse(StringBuilder sb, int level)
@@ -49,5 +52,6 @@ public class FigureNode implements ComponentNode
 		
 		sb.append("}\n\n---------------------------------------------------------");
     }
+    */
 	
 }

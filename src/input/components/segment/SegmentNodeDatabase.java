@@ -9,6 +9,7 @@ import java.util.*;
 
 import input.components.ComponentNode;
 import input.components.point.*;
+import input.visitor.ComponentNodeVisitor;
 import utilities.io.StringUtilities;
 
 /**
@@ -197,6 +198,11 @@ public class SegmentNodeDatabase implements ComponentNode {
 		
 		sb.append(StringUtilities.indent(level - 1));
 		sb.append("}\n");
+	}
+
+	@Override
+	public Object accept(ComponentNodeVisitor visitor, Object o) {
+		return visitor.visitSegmentDatabaseNode(null, o);
 	}
 	
 	
