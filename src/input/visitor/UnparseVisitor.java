@@ -17,6 +17,7 @@ import utilities.io.StringUtilities;
 //       Points
 //       Segments
 //
+
 public class UnparseVisitor implements ComponentNodeVisitor
 {
 	@Override
@@ -37,6 +38,8 @@ public class UnparseVisitor implements ComponentNodeVisitor
 		//get points
 		visitPointNodeDatabase(node.getPointsDatabase(), o);
 		visitPointNode(node.getPointsDatabase(), o);
+		
+		node.getPointsDatabase().accept(this, pair);
 		//_points.unparse(sb, level + 2);
 		//_segments.unparse(sb, level + 2);
 		
@@ -49,10 +52,32 @@ public class UnparseVisitor implements ComponentNodeVisitor
 	@Override
 	public Object visitSegmentDatabaseNode(SegmentNodeDatabase node, Object o)
 	{
-        // TODO
+			@SuppressWarnings("unchecked")
+			AbstractMap.SimpleEntry<StringBuilder, Integer> pair = (AbstractMap.SimpleEntry<StringBuilder, Integer>)(o);
+			StringBuilder sb = pair.getKey();
+			int level = pair.getValue();
+			
+			sb.append(StringUtilities.indent(level - 1));
+			sb.append("Segments: \n");
+			sb.append(StringUtilities.indent(level - 1));
+			sb.append("{\n");
+			
+			//loop over the segments
+			for (Map.Entry<PointNode, Set<PointNode>> key: node.asAdjList().entrySet()) {
+				sb.append(StringUtilities.indent(level));
+				sb.append(key.getKey().getName() + " : ");
+				for (PointNode value: key.getValue()) {
+					sb.append(value.getName() + "  ");
+				}
+				sb.append("\n");
+			}
+			
+			sb.append(StringUtilities.indent(level - 1));
+			sb.append("}\n");
 		
         return null;
 	}
+	
 
 	/**
 	 * This method should NOT be called since the segment database
@@ -83,14 +108,12 @@ public class UnparseVisitor implements ComponentNodeVisitor
 		*/
         // TODO
 		Set<PointNode> points = node.getPointsSet();
-		for (PointNode p: points) 
+		for (PointNode p: points)
 		{
 			//p.unparse(sb, level);
 			//sb.append("\n");
 			visitPointNode(p, o);
 		}
-		
-		
         return null;
 	}
 	

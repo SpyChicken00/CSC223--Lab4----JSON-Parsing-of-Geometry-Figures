@@ -200,6 +200,11 @@ public class SegmentNodeDatabase implements ComponentNode {
 	}
 	
 	
+	public Map<PointNode, Set<PointNode>> asAdjList()
+	{
+		return _adjLists;
+	}
+	
 	
 	
 	
