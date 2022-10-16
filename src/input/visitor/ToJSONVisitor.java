@@ -1,5 +1,8 @@
 package input.visitor;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import input.components.FigureNode;
 import input.components.point.PointNode;
 import input.components.point.PointNodeDatabase;
@@ -11,10 +14,23 @@ public class ToJSONVisitor implements ComponentNodeVisitor
 
 	@Override
 	public Object visitFigureNode(FigureNode node, Object o) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		JSONObject result = new JSONObject(); 
+		
+		String description = node.getDescription();
+		JSONObject descriptionJSON = new JSONObject();
+		descriptionJSON.put("Description", description);
+		
+		result.put("Figure", descriptionJSON);
+		
+		
+		
+		
+		
 	}
 
+		
+	
 	@Override
 	public Object visitSegmentDatabaseNode(SegmentNodeDatabase node, Object o) {
 		// TODO Auto-generated method stub
