@@ -40,12 +40,9 @@ public class UnparseVisitor implements ComponentNodeVisitor
 		//get segments
 		visitSegmentDatabaseNode(node.getSegments(), pair);
 		
-
-		//_points.unparse(sb, level + 2);
-		//_segments.unparse(sb, level + 2);
 		
 		sb.append("}\n\n---------------------------------------------------------");
-
+		System.out.println(sb.toString());
         return null;
 	}
 
@@ -57,14 +54,14 @@ public class UnparseVisitor implements ComponentNodeVisitor
 			StringBuilder sb = pair.getKey();
 			int level = pair.getValue();
 			
-			sb.append(StringUtilities.indent(level - 1));
+			sb.append(StringUtilities.indent(level + 1));
 			sb.append("Segments: \n");
-			sb.append(StringUtilities.indent(level - 1));
+			sb.append(StringUtilities.indent(level + 1));
 			sb.append("{\n");
 			
 			//loop over the segments
 			for (Map.Entry<PointNode, Set<PointNode>> key: node.asAdjList().entrySet()) {
-				sb.append(StringUtilities.indent(level));
+				sb.append(StringUtilities.indent(level+2));
 				sb.append(key.getKey().getName() + " : ");
 				for (PointNode value: key.getValue()) {
 					sb.append(value.getName() + "  ");
@@ -72,7 +69,7 @@ public class UnparseVisitor implements ComponentNodeVisitor
 				sb.append("\n");
 			}
 			
-			sb.append(StringUtilities.indent(level - 1));
+			sb.append(StringUtilities.indent(level + 1));
 			sb.append("}\n");
 		
         return null;
@@ -98,9 +95,9 @@ public class UnparseVisitor implements ComponentNodeVisitor
 		StringBuilder sb = pair.getKey();
 		int level = pair.getValue();
 		
-		sb.append(StringUtilities.indent(level - 1));
+		sb.append(StringUtilities.indent(level + 1));
 		sb.append("Points: \n");
-		sb.append(StringUtilities.indent(level - 1));
+		sb.append(StringUtilities.indent(level + 1));
 		sb.append("{\n");
         
 		Set<PointNode> points = node.getPointsSet();
@@ -109,19 +106,19 @@ public class UnparseVisitor implements ComponentNodeVisitor
 			visitPointNode(p, pair);
 		}
 		
-		sb.append(StringUtilities.indent(level - 1));
+		sb.append(StringUtilities.indent(level + 1));
 		sb.append("}\n");
 		return null;
 
 		/*
         // TODO
-		Set<PointNode> points = node.getPointsSet();
-		for (PointNode p: points)
-		{
-			//p.unparse(sb, level);
-			//sb.append("\n");
-			visitPointNode(p, o);
-		}
+//		Set<PointNode> points = node.getPointsSet();
+//		for (PointNode p: points)
+//		{
+//			//p.unparse(sb, level);
+//			//sb.append("\n");
+//			visitPointNode(p, o);
+//		}
         return null;
         */
 	}
@@ -136,7 +133,7 @@ public class UnparseVisitor implements ComponentNodeVisitor
 		int level = pair.getValue();
 		
 		
-		sb.append(StringUtilities.indent(level));
+		sb.append(StringUtilities.indent(level + 2));
 		sb.append("Point(" + node.getName() + ")(" + node.getX() + ", " + node.getY() + ")");
 		sb.append("\n");
 		

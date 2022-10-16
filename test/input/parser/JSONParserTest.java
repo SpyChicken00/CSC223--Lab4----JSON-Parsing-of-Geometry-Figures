@@ -73,17 +73,20 @@ class JSONParserTest
 		UnparseVisitor unparser = new UnparseVisitor();
 		unparser.visitFigureNode((FigureNode)node, new AbstractMap.SimpleEntry<StringBuilder, Integer>(sb, 0));
 		
+<<<<<<< Updated upstream
 		
 		//StringBuilder sb = new StringBuilder();
 		//node.unparse(sb, 0);
 		
 
 		//System.out.println(sb.toString());
+=======
+>>>>>>> Stashed changes
 	}
 
 
 	
-	/*
+	
 	@Test
 	void crossingSymmetricTriangleTest()
 	{
@@ -92,8 +95,8 @@ class JSONParserTest
 		assertTrue(node instanceof FigureNode);
 		
 		StringBuilder sb = new StringBuilder();
-		node.unparse(sb, 0);
-		System.out.println(sb.toString());
+		UnparseVisitor unparser = new UnparseVisitor();
+		unparser.visitFigureNode((FigureNode)node, new AbstractMap.SimpleEntry<StringBuilder, Integer>(sb, 0));
 	}
 	
 	
@@ -105,8 +108,8 @@ class JSONParserTest
 		assertTrue(node instanceof FigureNode);
 		
 		StringBuilder sb = new StringBuilder();
-		node.unparse(sb, 0);
-		System.out.println(sb.toString());
+		UnparseVisitor unparser = new UnparseVisitor();
+		unparser.visitFigureNode((FigureNode)node, new AbstractMap.SimpleEntry<StringBuilder, Integer>(sb, 0));
 	}
 	
 	@Test
@@ -117,8 +120,9 @@ class JSONParserTest
 		assertTrue(node instanceof FigureNode);
 		
 		StringBuilder sb = new StringBuilder();
-		node.unparse(sb, 0);
-		System.out.println(sb.toString());
+		UnparseVisitor unparser = new UnparseVisitor();
+		unparser.visitFigureNode((FigureNode)node, new AbstractMap.SimpleEntry<StringBuilder, Integer>(sb, 0));
+		
 	}
 	
 	
@@ -131,8 +135,9 @@ class JSONParserTest
 		assertTrue(node instanceof FigureNode);
 		
 		StringBuilder sb = new StringBuilder();
-		node.unparse(sb, 0);
-		System.out.println(sb.toString());
+		UnparseVisitor unparser = new UnparseVisitor();
+		unparser.visitFigureNode((FigureNode)node, new AbstractMap.SimpleEntry<StringBuilder, Integer>(sb, 0));
+		
 	}
 	
 	
@@ -144,8 +149,9 @@ class JSONParserTest
 		assertTrue(node instanceof FigureNode);
 		
 		StringBuilder sb = new StringBuilder();
-		node.unparse(sb, 0);
-		System.out.println(sb.toString());
+		UnparseVisitor unparser = new UnparseVisitor();
+		unparser.visitFigureNode((FigureNode)node, new AbstractMap.SimpleEntry<StringBuilder, Integer>(sb, 0));
+		
 	}
 	
 	
@@ -157,6 +163,6 @@ class JSONParserTest
 		ComponentNode node = JSONParserTest.runFigureParseTest("JSON/collinear_line_segments.json");
 		node = JSONParserTest.runFigureParseTest("JSON/single_triangle.json");
 	}
-	*/
+	
 	
 }
