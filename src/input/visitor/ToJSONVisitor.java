@@ -19,24 +19,34 @@ public class ToJSONVisitor implements ComponentNodeVisitor
 	@Override
 	public Object visitFigureNode(FigureNode node, Object o) {
 		
+	
+		//make empty figure JSON object to add to
 		JSONObject result = new JSONObject(); 
 		
-		String description = node.getDescription();
+		//make empty objects for components of figurenode
 		JSONObject descriptionJSON = new JSONObject();
+		JSONObject pointsJSON = new JSONObject(); 
+		JSONObject segmentJSON = new JSONObject(); 
+
+		//get description from node and add it to the result
+		String description = node.getDescription();
 		descriptionJSON.put("Description", description);
 				
+		//make segment node database and convert it to JSON array
 		SegmentNodeDatabase snDB = node.getSegments();
 		JSONArray segmentJSONArray = (JSONArray) visitSegmentDatabaseNode(snDB, null);
 		
-		PointNodeDatabase pnDB = node.getPointsDatabase();
-		JSONArray pointsJSONArray = (JSONArray) visitPointNodeDatabase(pnDB, null);
-
-		JSONObject segmentJSON = new JSONObject(); 
+		//add segment node database array to segment JSON object
 		segmentJSON.put("Segments", segmentJSONArray);
 		
-		JSONObject pointsJSON = new JSONObject(); 
+		//make point node database and convert it to JSON array
+		PointNodeDatabase pnDB = node.getPointsDatabase();
+		JSONArray pointsJSONArray = (JSONArray) visitPointNodeDatabase(pnDB, null);
+		
+		//add point node database array to point JSON object
 		pointsJSON.put("Points", pointsJSONArray);
 		
+		//add description, points, and segment JSON objects to result
 		result.append("Figure", descriptionJSON);
 		result.append("Figure", pointsJSON);
 		result.append("Figure", segmentJSON);
@@ -58,7 +68,7 @@ public class ToJSONVisitor implements ComponentNodeVisitor
 						
 			for (PointNode value: key.getValue()) {
 				
-				segmentObject.put(key.getKey().getName(), value.getName());
+				segmentObject.append(key.getKey().getName(), value.getName());
 			}
 			
 			segmentArray.put(segmentObject); 
@@ -69,8 +79,21 @@ public class ToJSONVisitor implements ComponentNodeVisitor
 
 	@Override
 	public Object visitSegmentNode(SegmentNode node, Object o) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		String p1 = node.getPoint1().getName();
+		String p2 = node.getPoint2().getName();
+		String name = p1 + p2; 
+		
+		JSONObject result = new JSONObject(); 
+		JSONArray values = new JSONArray(); 
+		
+		values.put(p1);
+		values.put(p2);
+		
+		result.put(name, values); 
+		
+		return result; 
+		
 	}
 
 	@Override

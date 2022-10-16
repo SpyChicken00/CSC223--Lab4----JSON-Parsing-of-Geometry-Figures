@@ -58,6 +58,23 @@ class JSONParserTest
 		assertEquals("Parse error: JSON Segments Not Found", exception.getMessage());
 	}
 
+	
+	@Test
+	void ToJSONTest() 
+	{
+		ComponentNode node = JSONParserTest.runFigureParseTest("JSON/single_triangle.json");
+
+		assertTrue(node instanceof FigureNode);
+		
+		ToJSONVisitor jsonVisitor = new ToJSONVisitor();
+		JSONObject FigureNodeJSON = (JSONObject) jsonVisitor.visitFigureNode((FigureNode) node, null);
+
+		System.out.println(FigureNodeJSON.toString());
+
+	}
+	
+	
+	
 	@Test
 	void single_triangle_test()
 	{
@@ -141,21 +158,6 @@ class JSONParserTest
 		
 	}
 	
-	@Test
-	void ToJSONTest() 
-	{
-		ComponentNode node = JSONParserTest.runFigureParseTest("JSON/single_triangle.json");
-
-		assertTrue(node instanceof FigureNode);
-		
-		ToJSONVisitor jsonVisitor = new ToJSONVisitor();
-		JSONObject FigureNodeJSON = (JSONObject) jsonVisitor.visitFigureNode((FigureNode) node, null);
-		System.out.println("WWJDANJDNWWNDANWJNDJKANDKWNDNDK");
-
-		System.out.println(FigureNodeJSON.toString());
-		System.out.println("WWJDANJDNWWNDANWJNDJKANDKWNDNDK");
-
-	}
 	
 	
 	@Test
@@ -164,6 +166,9 @@ class JSONParserTest
 		ComponentNode node = JSONParserTest.runFigureParseTest("JSON/collinear_line_segments.json");
 		node = JSONParserTest.runFigureParseTest("JSON/single_triangle.json");
 	}
+	
+
+	
 	
 	
 }
