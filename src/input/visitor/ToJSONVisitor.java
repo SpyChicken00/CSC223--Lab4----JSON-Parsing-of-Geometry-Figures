@@ -54,11 +54,12 @@ public class ToJSONVisitor implements ComponentNodeVisitor
 			for (PointNode value: key.getValue()) {
 				
 				segmentObject.put(key.getKey().getName(), value.getName());
-
 			}
+			
+			segmentArray.put(segmentObject); 
 		}
 		
-		return null;
+		return segmentArray;
 	}
 
 	@Override
