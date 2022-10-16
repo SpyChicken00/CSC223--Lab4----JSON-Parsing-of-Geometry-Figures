@@ -5,11 +5,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.AbstractMap;
 
+import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 
 import input.components.ComponentNode;
 import input.components.FigureNode;
 import input.exception.ParseException;
+import input.visitor.ToJSONVisitor;
 import input.visitor.UnparseVisitor;
 
 /**
@@ -67,7 +69,6 @@ class JSONParserTest
 		UnparseVisitor unparser = new UnparseVisitor();
 		unparser.visitFigureNode((FigureNode)node, new AbstractMap.SimpleEntry<StringBuilder, Integer>(sb, 0));
 		
-
 	}
 
 
@@ -140,7 +141,17 @@ class JSONParserTest
 		
 	}
 	
-	
+	@Test
+	void ToJSONTest() 
+	{
+		ComponentNode node = JSONParserTest.runFigureParseTest("JSON/single_triangle.json");
+
+		assertTrue(node instanceof FigureNode);
+		
+		ToJSONVisitor jsonVisitor = new ToJSONVisitor();
+		JSONObject FigureNodeJSON = (JSONObject) jsonVisitor.visitFigureNode(null, jsonVisitor);
+		System.out.println(FigureNodeJSON.toString());
+	}
 	
 	
 	@Test
