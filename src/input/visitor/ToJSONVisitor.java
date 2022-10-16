@@ -28,13 +28,10 @@ public class ToJSONVisitor implements ComponentNodeVisitor
 		result.put("Figure", descriptionJSON);
 		
 		SegmentNodeDatabase snDB = node.getSegments();
-		
-		visitSegmentDatabaseNode(snDB, null); 
+		result.put("Segments", visitSegmentDatabaseNode(snDB, null)); 
 		
 		PointNodeDatabase pnDB = node.getPointsDatabase();
-		
-		visitPointNodeDatabase(pnDB, null); 
-		
+		result.put("Points", visitPointNodeDatabase(pnDB, null)); 
 		
 		return result; 
 		
