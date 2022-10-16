@@ -5,17 +5,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.AbstractMap;
 
-import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 
 import input.components.ComponentNode;
 import input.components.FigureNode;
-import input.components.point.PointNode;
-import input.components.point.PointNodeDatabase;
-import input.components.segment.SegmentNode;
-import input.components.segment.SegmentNodeDatabase;
 import input.exception.ParseException;
-import input.visitor.ComponentNodeVisitor;
 import input.visitor.UnparseVisitor;
 
 /**
@@ -73,15 +67,7 @@ class JSONParserTest
 		UnparseVisitor unparser = new UnparseVisitor();
 		unparser.visitFigureNode((FigureNode)node, new AbstractMap.SimpleEntry<StringBuilder, Integer>(sb, 0));
 		
-<<<<<<< Updated upstream
-		
-		//StringBuilder sb = new StringBuilder();
-		//node.unparse(sb, 0);
-		
 
-		//System.out.println(sb.toString());
-=======
->>>>>>> Stashed changes
 	}
 
 
