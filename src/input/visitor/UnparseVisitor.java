@@ -111,7 +111,9 @@ public class UnparseVisitor implements ComponentNodeVisitor
 		
 		sb.append(StringUtilities.indent(level - 1));
 		sb.append("}\n");
+		return null;
 
+		/*
         // TODO
 		Set<PointNode> points = node.getPointsSet();
 		for (PointNode p: points)
@@ -121,6 +123,7 @@ public class UnparseVisitor implements ComponentNodeVisitor
 			visitPointNode(p, o);
 		}
         return null;
+        */
 	}
 	
 	@Override

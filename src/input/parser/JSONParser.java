@@ -29,7 +29,7 @@ import input.exception.ParseException;
 public class JSONParser
 {
 	protected ComponentNode  _astRoot;
-	protected GeometryBuilder _builder;
+	protected DefaultBuilder _builder;
 
 	public JSONParser()
 	{
