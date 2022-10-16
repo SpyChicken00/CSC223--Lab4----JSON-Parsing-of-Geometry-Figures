@@ -24,14 +24,22 @@ public class ToJSONVisitor implements ComponentNodeVisitor
 		String description = node.getDescription();
 		JSONObject descriptionJSON = new JSONObject();
 		descriptionJSON.put("Description", description);
-		
-		result.put("Figure", descriptionJSON);
-		
+				
 		SegmentNodeDatabase snDB = node.getSegments();
-		result.put("Segments", visitSegmentDatabaseNode(snDB, null)); 
+		JSONArray segmentJSONArray = (JSONArray) visitSegmentDatabaseNode(snDB, null);
 		
 		PointNodeDatabase pnDB = node.getPointsDatabase();
-		result.put("Points", visitPointNodeDatabase(pnDB, null)); 
+		JSONArray pointsJSONArray = (JSONArray) visitPointNodeDatabase(pnDB, null);
+
+		JSONObject segmentJSON = new JSONObject(); 
+		segmentJSON.put("Segments", segmentJSONArray);
+		
+		JSONObject pointsJSON = new JSONObject(); 
+		pointsJSON.put("Points", pointsJSONArray);
+		
+		result.append("Figure", descriptionJSON);
+		result.append("Figure", pointsJSON);
+		result.append("Figure", segmentJSON);
 		
 		return result; 
 		

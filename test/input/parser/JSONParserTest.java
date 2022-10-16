@@ -149,8 +149,12 @@ class JSONParserTest
 		assertTrue(node instanceof FigureNode);
 		
 		ToJSONVisitor jsonVisitor = new ToJSONVisitor();
-		JSONObject FigureNodeJSON = (JSONObject) jsonVisitor.visitFigureNode(null, jsonVisitor);
+		JSONObject FigureNodeJSON = (JSONObject) jsonVisitor.visitFigureNode((FigureNode) node, null);
+		System.out.println("WWJDANJDNWWNDANWJNDJKANDKWNDNDK");
+
 		System.out.println(FigureNodeJSON.toString());
+		System.out.println("WWJDANJDNWWNDANWJNDJKANDKWNDNDK");
+
 	}
 	
 	
