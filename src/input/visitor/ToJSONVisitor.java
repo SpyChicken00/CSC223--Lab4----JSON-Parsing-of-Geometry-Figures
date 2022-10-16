@@ -1,5 +1,8 @@
 package input.visitor;
 
+import java.util.Map;
+import java.util.Set;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -8,6 +11,7 @@ import input.components.point.PointNode;
 import input.components.point.PointNodeDatabase;
 import input.components.segment.SegmentNode;
 import input.components.segment.SegmentNodeDatabase;
+import utilities.io.StringUtilities;
 
 public class ToJSONVisitor implements ComponentNodeVisitor
 {
@@ -23,9 +27,16 @@ public class ToJSONVisitor implements ComponentNodeVisitor
 		
 		result.put("Figure", descriptionJSON);
 		
+		SegmentNodeDatabase snDB = node.getSegments();
+		
+		visitSegmentDatabaseNode(snDB, null); 
+		
+		PointNodeDatabase pnDB = node.getPointsDatabase();
+		
+		visitPointNodeDatabase(pnDB, null); 
 		
 		
-		
+		return result; 
 		
 	}
 
@@ -33,7 +44,20 @@ public class ToJSONVisitor implements ComponentNodeVisitor
 	
 	@Override
 	public Object visitSegmentDatabaseNode(SegmentNodeDatabase node, Object o) {
-		// TODO Auto-generated method stub
+		
+		JSONArray segmentArray = new JSONArray(); 
+		
+		for (Map.Entry<PointNode, Set<PointNode>> key: node.asAdjList().entrySet()) {
+			
+			JSONObject segmentObject = new JSONObject();
+						
+			for (PointNode value: key.getValue()) {
+				
+				segmentObject.put(key.getKey().getName(), value.getName());
+
+			}
+		}
+		
 		return null;
 	}
 
@@ -45,14 +69,34 @@ public class ToJSONVisitor implements ComponentNodeVisitor
 
 	@Override
 	public Object visitPointNode(PointNode node, Object o) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		JSONObject pointJSON = new JSONObject();
+		
+		String name = node.getName(); //split into two steps for readability 
+		Double x = node.getX();
+		Double y = node.getY();
+		
+		pointJSON.put("name", name);
+		pointJSON.put("x", x);
+		pointJSON.put("y", y);
+		
+		return pointJSON; 
+		
 	}
 
 	@Override
 	public Object visitPointNodeDatabase(PointNodeDatabase node, Object o) {
 		// TODO Auto-generated method stub
-		return null;
+		
+		JSONArray pointArray = new JSONArray(); 
+		
+		for(PointNode pn: node.getPointsSet())
+		{
+			pointArray.put(visitPointNode(pn, null));
+		}
+		
+		return pointArray;
+		
 	}
 	
 }
