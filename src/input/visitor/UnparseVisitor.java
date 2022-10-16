@@ -34,12 +34,10 @@ public class UnparseVisitor implements ComponentNodeVisitor
 		
 		//unparsing the children
 		sb.append("Description: " + node.getDescription() +"\n");
-		
 		//get points
 		visitPointNodeDatabase(node.getPointsDatabase(), pair);
 		//get segments
 		visitSegmentDatabaseNode(node.getSegments(), pair);
-		
 		
 		sb.append("}\n\n---------------------------------------------------------");
 		System.out.println(sb.toString());
@@ -83,6 +81,17 @@ public class UnparseVisitor implements ComponentNodeVisitor
 	@Override
 	public Object visitSegmentNode(SegmentNode node, Object o)
 	{
+		// Unpack the input object containing a Stringbuilder and an indentation level
+		@SuppressWarnings("unchecked")
+		AbstractMap.SimpleEntry<StringBuilder, Integer> pair = (AbstractMap.SimpleEntry<StringBuilder, Integer>)(o);
+		StringBuilder sb = pair.getKey();
+		int level = pair.getValue();
+		
+		//add points 1 and 2 to string builder
+		sb.append(node.getPoint1());
+		sb.append(node.getPoint2());
+		sb.append("\n");
+		
 		return null;
 	}
 
@@ -109,18 +118,6 @@ public class UnparseVisitor implements ComponentNodeVisitor
 		sb.append(StringUtilities.indent(level + 1));
 		sb.append("}\n");
 		return null;
-
-		/*
-        // TODO
-//		Set<PointNode> points = node.getPointsSet();
-//		for (PointNode p: points)
-//		{
-//			//p.unparse(sb, level);
-//			//sb.append("\n");
-//			visitPointNode(p, o);
-//		}
-        return null;
-        */
 	}
 	
 	@Override
@@ -131,7 +128,6 @@ public class UnparseVisitor implements ComponentNodeVisitor
 		AbstractMap.SimpleEntry<StringBuilder, Integer> pair = (AbstractMap.SimpleEntry<StringBuilder, Integer>)(o);
 		StringBuilder sb = pair.getKey();
 		int level = pair.getValue();
-		
 		
 		sb.append(StringUtilities.indent(level + 2));
 		sb.append("Point(" + node.getName() + ")(" + node.getX() + ", " + node.getY() + ")");
