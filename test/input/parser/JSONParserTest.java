@@ -62,7 +62,7 @@ class JSONParserTest
 	@Test
 	void ToJSONTest() 
 	{
-		ComponentNode node = JSONParserTest.runFigureParseTest("JSON/single_triangle.json");
+		ComponentNode node = JSONParserTest.runFigureParseTest("JSON/sailboat.json");
 
 		assertTrue(node instanceof FigureNode);
 		
