@@ -16,10 +16,14 @@ import utilities.io.StringUtilities;
 public class ToJSONVisitor implements ComponentNodeVisitor
 {
 
+	
+	/*
+	 * This method collects all of the components of a figure node object
+	 * and returns its corresponding JSON object
+	 */
 	@Override
 	public Object visitFigureNode(FigureNode node, Object o) {
-		
-	
+
 		//make empty figure JSON object to add to
 		JSONObject result = new JSONObject(); 
 		
@@ -56,7 +60,10 @@ public class ToJSONVisitor implements ComponentNodeVisitor
 	}
 
 		
-	
+	/*
+	 * Takes a segment node database object and returns a JSON 
+	 * version of it
+	 */
 	@Override
 	public Object visitSegmentDatabaseNode(SegmentNodeDatabase node, Object o) {
 		
@@ -77,6 +84,9 @@ public class ToJSONVisitor implements ComponentNodeVisitor
 		return segmentArray;
 	}
 
+	/*
+	 * Takes a segment node and returns a JSON object of it
+	 */
 	@Override
 	public Object visitSegmentNode(SegmentNode node, Object o) {
 		
@@ -96,6 +106,10 @@ public class ToJSONVisitor implements ComponentNodeVisitor
 		
 	}
 
+	
+	/*
+	 * Takes a point node object and returns a JSON version of it
+	 */
 	@Override
 	public Object visitPointNode(PointNode node, Object o) {
 		
@@ -112,7 +126,11 @@ public class ToJSONVisitor implements ComponentNodeVisitor
 		return pointJSON; 
 		
 	}
-
+	
+	
+	/*
+	 * takes a point node database and returns a JSON version of it
+	 */
 	@Override
 	public Object visitPointNodeDatabase(PointNodeDatabase node, Object o) {
 		// TODO Auto-generated method stub
