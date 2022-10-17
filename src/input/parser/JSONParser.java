@@ -31,10 +31,10 @@ public class JSONParser
 	protected ComponentNode  _astRoot;
 	protected DefaultBuilder _builder;
 
-	public JSONParser()
+	public JSONParser(DefaultBuilder UserBuilder)
 	{
 		_astRoot = null;
-		_builder = new GeometryBuilder();
+		_builder = UserBuilder;
 		
 	}
 

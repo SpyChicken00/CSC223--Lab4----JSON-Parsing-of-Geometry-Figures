@@ -47,8 +47,7 @@ public class UnparseVisitor implements ComponentNodeVisitor
 		visitSegmentDatabaseNode(node.getSegments(), pair);
 		
 		sb.append("}\n\n---------------------------------------------------------");
-		System.out.println(sb.toString());
-        return null;
+        return sb.toString();
 	}
 
 	@Override

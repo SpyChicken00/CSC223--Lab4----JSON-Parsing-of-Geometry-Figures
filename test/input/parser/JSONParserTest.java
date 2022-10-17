@@ -8,6 +8,8 @@ import java.util.AbstractMap;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 
+import input.builder.DefaultBuilder;
+import input.builder.GeometryBuilder;
 import input.components.ComponentNode;
 import input.components.FigureNode;
 import input.exception.ParseException;
@@ -24,7 +26,8 @@ class JSONParserTest
 {
 	public static ComponentNode runFigureParseTest(String filename)
 	{
-		JSONParser parser = new JSONParser();
+		GeometryBuilder geoBuilder = new GeometryBuilder();
+		JSONParser parser = new JSONParser(geoBuilder);
 
 		String figureStr = utilities.io.FileUtilities.readFileFilterComments(filename);
 		
@@ -35,7 +38,8 @@ class JSONParserTest
 	@Test
 	void invalid_json_string_test()
 	{
-		JSONParser parser = new JSONParser();
+		DefaultBuilder geoBuilder = new GeometryBuilder();
+		JSONParser parser = new JSONParser(geoBuilder);
 		//check empty string
 		assertThrows(ParseException.class, () -> { parser.parse("{}"); });
 
@@ -84,8 +88,8 @@ class JSONParserTest
 		
 		StringBuilder sb = new StringBuilder();
 		UnparseVisitor unparser = new UnparseVisitor();
-		unparser.visitFigureNode((FigureNode)node, new AbstractMap.SimpleEntry<StringBuilder, Integer>(sb, 0));
-		
+		String JSONString = (String) unparser.visitFigureNode((FigureNode)node, new AbstractMap.SimpleEntry<StringBuilder, Integer>(sb, 0));
+		System.out.println(JSONString);
 	}
 
 
@@ -100,7 +104,8 @@ class JSONParserTest
 		
 		StringBuilder sb = new StringBuilder();
 		UnparseVisitor unparser = new UnparseVisitor();
-		unparser.visitFigureNode((FigureNode)node, new AbstractMap.SimpleEntry<StringBuilder, Integer>(sb, 0));
+		String JSONString = (String) unparser.visitFigureNode((FigureNode)node, new AbstractMap.SimpleEntry<StringBuilder, Integer>(sb, 0));
+		System.out.println(JSONString);
 	}
 	
 	
@@ -113,7 +118,8 @@ class JSONParserTest
 		
 		StringBuilder sb = new StringBuilder();
 		UnparseVisitor unparser = new UnparseVisitor();
-		unparser.visitFigureNode((FigureNode)node, new AbstractMap.SimpleEntry<StringBuilder, Integer>(sb, 0));
+		String JSONString = (String) unparser.visitFigureNode((FigureNode)node, new AbstractMap.SimpleEntry<StringBuilder, Integer>(sb, 0));
+		System.out.println(JSONString);
 	}
 	
 	@Test
@@ -125,8 +131,8 @@ class JSONParserTest
 		
 		StringBuilder sb = new StringBuilder();
 		UnparseVisitor unparser = new UnparseVisitor();
-		unparser.visitFigureNode((FigureNode)node, new AbstractMap.SimpleEntry<StringBuilder, Integer>(sb, 0));
-		
+		String JSONString = (String) unparser.visitFigureNode((FigureNode)node, new AbstractMap.SimpleEntry<StringBuilder, Integer>(sb, 0));
+		System.out.println(JSONString);
 	}
 	
 	
@@ -140,8 +146,8 @@ class JSONParserTest
 		
 		StringBuilder sb = new StringBuilder();
 		UnparseVisitor unparser = new UnparseVisitor();
-		unparser.visitFigureNode((FigureNode)node, new AbstractMap.SimpleEntry<StringBuilder, Integer>(sb, 0));
-		
+		String JSONString = (String) unparser.visitFigureNode((FigureNode)node, new AbstractMap.SimpleEntry<StringBuilder, Integer>(sb, 0));
+		System.out.println(JSONString);
 	}
 	
 	
@@ -154,18 +160,10 @@ class JSONParserTest
 		
 		StringBuilder sb = new StringBuilder();
 		UnparseVisitor unparser = new UnparseVisitor();
-		unparser.visitFigureNode((FigureNode)node, new AbstractMap.SimpleEntry<StringBuilder, Integer>(sb, 0));
-		
+		String JSONString = (String) unparser.visitFigureNode((FigureNode)node, new AbstractMap.SimpleEntry<StringBuilder, Integer>(sb, 0));
+		System.out.println(JSONString);
 	}
 	
-	
-	
-	@Test
-	//TODO temp to get output from private functions
-	void buildPointNodeDatabase() {
-		ComponentNode node = JSONParserTest.runFigureParseTest("JSON/collinear_line_segments.json");
-		node = JSONParserTest.runFigureParseTest("JSON/single_triangle.json");
-	}
 	
 
 	
