@@ -13,6 +13,14 @@ import input.components.segment.SegmentNode;
 import input.components.segment.SegmentNodeDatabase;
 import utilities.io.StringUtilities;
 
+/**
+ * A toJSON visitor class that turns the respective nodes of a figure node into a JSON object 
+*
+* <p>Bugs: 
+* 
+* @author Jace Rettig, Jack, and George
+* @Date 10-2-22
+*/
 public class ToJSONVisitor implements ComponentNodeVisitor
 {
 

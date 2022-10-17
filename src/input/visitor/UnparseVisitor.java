@@ -17,7 +17,14 @@ import utilities.io.StringUtilities;
 //       Points
 //       Segments
 //
-
+/**
+ * An Unparse Visitor Class that prints out a toString representation of the JSON file
+*
+* <p>Bugs: 
+* 
+* @author Jace Rettig, Jack, and George
+* @Date 10-2-22
+*/
 public class UnparseVisitor implements ComponentNodeVisitor
 {
 	@Override
